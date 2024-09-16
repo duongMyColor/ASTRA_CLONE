@@ -1,0 +1,20 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#canvas {
+  border: 1px dotted black;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 1200px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}

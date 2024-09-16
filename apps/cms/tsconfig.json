@@ -1,0 +1,31 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    // "baseUrl": "./", // Add a leading './' to the baseUrl
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // Need to declare in each app to ensure app can understand the path
+
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+ 
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "prisma/seed.ts",
+    "src/app/api/_core/success.response.ts",
+    "src/utils/excludeKey.js",
+    "src/app/_memo/page.tsx",
+    "src/app/chart/dataFetcher.js",
+    "prisma/migrate.mts"
+, "password.js"  ],
+  "exclude": ["node_modules"]
+}

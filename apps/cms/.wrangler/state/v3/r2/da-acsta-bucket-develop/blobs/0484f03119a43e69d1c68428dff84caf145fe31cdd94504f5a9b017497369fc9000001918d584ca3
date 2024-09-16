@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Page Layout</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header,
+      footer {
+        background-color: #4caf50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      footer {
+        background-color: #333;
+      }
+
+      main {
+        flex: 2;
+        padding: 2rem;
+      }
+
+      .section {
+        margin-bottom: 2rem;
+      }
+
+      .section img {
+        max-width: 100%;
+        height: auto;
+        margin: 0.5rem;
+      }
+
+      .section-one img {
+        width: calc(33.333% - 1rem); /* 3 ảnh mỗi hàng */
+        margin: 0.5rem;
+      }
+
+      .section-two {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .info,
+      .policy {
+        flex: 1;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      .info h2,
+      .policy h2 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Header</h1>
+    </header>
+<div class=”sketchfab-embed-wrapper”> <iframe title=”VTuber – Anime style” frameborder=”0″ allowfullscreen mozallowfullscreen=”true” webkitallowfullscreen=”true” allow=”autoplay; fullscreen; xr-spatial-tracking” xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width=”640″ height=”480″ src=”https://sketchfab.com/models/a0bf9617b0834c7294c0994ba5154a61/embed”> </iframe> <p style=”font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;”> <a href=”https://sketchfab.com/3d-models/vtuber-anime-style-a0bf9617b0834c7294c0994ba5154a61?utm_medium=embed&utm_campaign=share-popup&utm_content=a0bf9617b0834c7294c0994ba5154a61″ target=”_blank” rel=”nofollow” style=”font-weight: bold; color: #1CAAD9;”> VTuber – Anime style </a> by <a href=”https://sketchfab.com/mycolor?utm_medium=embed&utm_campaign=share-popup&utm_content=a0bf9617b0834c7294c0994ba5154a61″ target=”_blank” rel=”nofollow” style=”font-weight: bold; color: #1CAAD9;”> mycolor </a> on <a href=”https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=a0bf9617b0834c7294c0994ba5154a61″ target=”_blank” rel=”nofollow” style=”font-weight: bold; color: #1CAAD9;”>Sketchfab</a></p></div>
+  </body>
+</html>

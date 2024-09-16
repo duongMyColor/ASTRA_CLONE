@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Use</title>
+    <style>assetbundle
+      .terms-content {
+        margin: 0 auto;
+        width: 80%;
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Terms of Use</h1>
+    <div class="terms-content">
+      <!-- Insert your terms of use content here -->
+    </div>
+  </body>
+</html>

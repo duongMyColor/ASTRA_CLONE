@@ -1,0 +1,173 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// stores allowed values for user roles
+// enum : ['ADMIN', 'READ_ONLY', 'GENERAL']
+model UserRole {
+  id    String @id
+  users User[]
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  role      String    @default("READ_ONLY")
+  enabled   Boolean   @default(true)
+  email     String    
+  password  String
+  isDeleted Boolean   @default(false)
+  lastLogin DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  userRole UserRole  @relation(fields: [role], references: [id])
+  keyToken KeyToken?
+}
+
+model KeyToken {
+  id                Int     @id @default(autoincrement())
+  userId            Int     @unique
+  publicKey         String? @unique
+  privateKey        String? @unique
+  refreshToken      String? @unique
+  // JSON object
+  // Currently, Prisma do not suport JSON type
+  refreshTokensUsed String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AplicationMaster {
+  id                 Int      @id @default(autoincrement())
+  appName            String  
+  packageName        String   @unique
+  termsOfUseId       Int
+  licenseId          Int
+  assetBundleIOS     String
+  assetBundleAndroid String
+  encryptKey         String
+  outlineUrl         String
+  isDeleted          Boolean   @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  termOfUse TermsOfUse @relation(fields: [termsOfUseId], references: [id])
+  license   License    @relation(fields: [licenseId], references: [id])
+
+  acsta        AcstaManagement[]
+  forcedUpdate ForcedUpdateManagement[]
+}
+
+model AcstaManagement {
+  id               Int       @id @default(autoincrement())
+  managementName   String
+  acstaName        String
+  applicationId    Int
+  isDeleted        Boolean   @default(false)
+  thumbnailUrl     String
+  scanImageUrl     String
+  acstaBasicInfoId Int?
+  scanOriginX      Float?
+  scanOriginY      Float?
+  scanWidth        Float?
+  scanHeight       Float?
+  scanColors       String?
+  modeId           Int?
+  dateStart        DateTime
+  dateEnd          DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  application AplicationMaster       @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  performace  PerformaceManagement[]
+}
+
+model PerformaceTypeMaster {
+  id        Int      @id @default(autoincrement())
+  typeName  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  performances PerformaceManagement[]
+}
+
+model PerformaceManagement {
+  id                      Int      @id @default(autoincrement())
+  name                    String
+  isDeleted               Boolean   @default(false)
+  performanceTypeMasterId Int
+  assetBundleIOS          String
+  acstaId                 Int
+  assetBundleAndroid      String
+  encryptKey              String
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  performanceTypeMaster PerformaceTypeMaster @relation(fields: [performanceTypeMasterId], references: [id])
+  acsta                 AcstaManagement      @relation(fields: [acstaId], references: [id])
+}
+
+model TermsOfUse {
+  id            Int      @id @default(autoincrement())
+  memo          String?   
+  version       Int
+  content       String
+  publishedDate DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  applications AplicationMaster[]
+}
+
+model License {
+  id            Int      @id @default(autoincrement())
+  memo          String?
+  version       Int
+  content       String
+  publishedDate DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  applications AplicationMaster[]
+}
+
+model IdLastestOfRecord {
+  id        Int      @id @default(autoincrement())
+  name      String
+  idLastest Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ForcedUpdateManagement {
+  id             Int      @id @default(autoincrement())
+  appMasterId    Int
+  managementName String
+  operateSystem  String
+  version        String
+  publishedDate  DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  aplicationMaster AplicationMaster @relation(fields: [appMasterId], references: [id])
+}
+
+model BootUpdate {
+  id        Int      @id @default(autoincrement())
+  tableName String   @unique /// table name
+  createdAt DateTime @default(now()) /// Creation date and time
+  updatedAt DateTime @updatedAt /// updated date and time
+}

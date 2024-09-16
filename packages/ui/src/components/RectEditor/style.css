@@ -1,0 +1,13 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 1200px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}

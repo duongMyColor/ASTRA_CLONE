@@ -1,0 +1,99 @@
+name = "da-acsta-api"
+main = "./src/index.ts"
+compatibility_date = "2023-12-01"
+compatibility_flags = [ "nodejs_compat" ]
+
+account_id = "d13a85c5ad0898a62c4f98154be549c7"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "da-acsta-db-develop"
+database_id = "70af6666-d0a1-4322-82d9-4f4aced6c587"
+migrations_dir = "./prisma/migrations"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = 'da-acsta-bucket-develop'
+
+[env.develop]
+name = "da-acsta-api-develop"
+
+[env.develop.vars]
+USERNAME = "username"
+PASSWORD = "password"
+CLOUDFLARE_BUCKET_NAME = "da-acsta-bucket-develop"
+
+[[env.develop.d1_databases]]
+binding = "DB"
+database_name = "da-acsta-db-develop"
+database_id = "70af6666-d0a1-4322-82d9-4f4aced6c587"
+migrations_dir = "./prisma/migrations"
+
+[[env.develop.r2_buckets]]
+binding = "BUCKET"
+bucket_name = "da-acsta-bucket-develop"
+
+[env.staging]
+name = "da-acsta-api-staging"
+
+[env.staging.vars]
+CLOUDFLARE_BUCKET_NAME = "da-acsta-bucket-staging"
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "da-acsta-db-staging"
+database_id = "d4b60b09-4c08-44b1-bd15-82219f053d90"
+migrations_dir = "./prisma/migrations"
+
+[[env.staging.r2_buckets]]
+binding = "BUCKET"
+bucket_name = "da-acsta-bucket-staging"
+
+[env.stress]
+name = "da-acsta-api-stress"
+
+[env.stress.vars]
+CLOUDFLARE_BUCKET_NAME = "da-acsta-bucket-stress"
+
+[[env.stress.d1_databases]]
+binding = "DB"
+database_name = "da-acsta-db-stress"
+database_id = "fe4e9249-d98d-423a-8a37-ff1187d7ce92"
+migrations_dir = "./prisma/migrations"
+
+[[env.stress.r2_buckets]]
+binding = "BUCKET"
+bucket_name = "da-acsta-bucket-stress"
+
+[env.qa]
+name = "da-acsta-api-qa"
+
+[env.qa.vars]
+CLOUDFLARE_BUCKET_NAME = "da-acsta-bucket-qa"
+
+[[env.qa.d1_databases]]
+binding = "DB"
+database_name = "da-acsta-db-qa"
+database_id = "0a2dc531-c888-4533-aadf-266c8605a6d2"
+migrations_dir = "./prisma/migrations"
+
+[[env.qa.r2_buckets]]
+binding = "BUCKET"
+bucket_name = "da-acsta-bucket-qa"
+
+[env.production]
+name = "da-acsta-api-production"
+
+[env.production.vars]
+CLOUDFLARE_BUCKET_NAME = "da-acsta-bucket-production"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "da-acsta-db-production"
+database_id = "d4878e13-21b3-4514-9d38-754b5ebe2953"
+migrations_dir = "./prisma/migrations"
+
+[[env.production.r2_buckets]]
+binding = "BUCKET"
+bucket_name = "da-acsta-bucket-production"

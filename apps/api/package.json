@@ -1,0 +1,34 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev":  "wrangler dev src/index.ts --persist-to ../cms/.wrangler/state --local --env develop",
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "db:migrate": "npx tsx prisma/migrate.mts",
+    "db:seed": "npx tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.503.1",
+    "@aws-sdk/s3-request-presigner": "^3.503.1",
+    "@cubejs-client/core": "^0.34.37",
+    "@hono/swagger-ui": "^0.2.2",
+    "@hono/zod-openapi": "^0.12.2",
+    "@prisma/client": "^5.13.0",
+    "hono": "^4.3.6"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240403.0",
+    "@repo/assets": "*",
+    "@repo/consts": "*",
+    "@repo/eslint-config": "*",
+    "@repo/lib": "*",
+    "@repo/styles": "*",
+    "@repo/types": "*",
+    "@repo/typescript-config": "*",
+    "@repo/ui": "*",
+    "@repo/utils": "*",
+    "@types/node": "^20.11.24",
+    "wrangler": "^3.67.1"
+  }
+}

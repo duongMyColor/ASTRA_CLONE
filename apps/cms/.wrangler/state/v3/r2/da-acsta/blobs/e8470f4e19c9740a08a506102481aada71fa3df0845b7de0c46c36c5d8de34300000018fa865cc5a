@@ -1,0 +1,167 @@
+// Figma Personal Access Tokenを設定する
+  let accessToken = "";
+  let figmaFileKey = "";
+  let maxSize = 200;
+
+function getSetting(){
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const settingSheet = spreadsheet.getSheetByName("setting");
+  
+  // A1セルの値を取得
+  // accessToken = settingSheet.getRange("B2").getValue();
+  if(accessToken == ""){
+    accessToken = Browser.inputBox("APIKeyを入力してください", Browser.Buttons.OK_CANCEL);
+  }
+  // figmaFileKey = settingSheet.getRange("B3").getValue();
+  if(figmaFileKey == ""){
+    figmaFileKey = Browser.inputBox("FileKeyを入力してください", Browser.Buttons.OK_CANCEL);
+  }
+
+  mxSize = settingSheet.getRange("B4").getValue();
+  if(mxSize != "" && mxSize!=null){
+    maxSize = mxSize;
+  }
+}
+
+
+// セルで使う場合はURLだけ返して、画像は別途表示するしかない（setFormulaがセルから起動すると使えないため）
+function getFigmaImage(nodeId) {
+  // getSetting();
+  // Figma APIのエンドポイントを設定する
+
+  console.log("nodeId:",nodeId)
+  const imageUrl = `https://api.figma.com/v1/images/${figmaFileKey}?ids=${nodeId}&format=jpg&scale=1`;
+  const options = {
+    headers: {
+      'X-Figma-Token': accessToken
+    }
+  };
+  let data="";
+  try{
+  const imageResponse = UrlFetchApp.fetch(imageUrl, options);
+  //const imageBlob = imageResponse.getBlob().setName(`${nodeId}.jpg`);
+  data = JSON.parse(imageResponse.getContentText());
+  console.log({data})
+  }
+  catch(e){
+    console.log({e})
+    return e +"/"+ imageUrl
+  }
+
+  // if(nodeId.toString().indexOf("-")>0){
+  //   nodeId = nodeId.replace("-",":");
+  // }
+
+  imageResURL = data.images[nodeId]
+
+  return imageResURL
+}
+
+function setImageCell(iamgeUrl){
+  var image = fetchImage(url);
+}
+
+function setImageToCell(imageUrl,idx) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const activeCell = sheet.getActiveCell();
+  const row = activeCell.getRow();
+  const column = activeCell.getColumn() + idx; // アクティブセルの右隣の列に設定する
+  
+  // セル内の関数で使う場合は以下どちらの方法もできない
+  // 関数直接実行の場合は使える
+
+  // 方法１：IMAGE関数でURLの画像をセットする
+  const formula = `=IMAGE("${imageUrl}")`;
+  sheet.getRange(row, column).setFormula(formula);
+  sheet.setRowHeight(row, 100);
+  sheet.setColumnWidth(column, 100);
+
+  // 方法2：imageそのものをフェッチして画像をセットする
+  // blobが１００万画素以内という制限があるので大きいものに使えなかった
+  /*
+  let image = UrlFetchApp.fetch(imageUrl);
+  let inImage = sheet.insertImage(image, column,row);
+  let height = inImage.getHeight();
+  let width = inImage.getWidth();
+  console.log(height + "/" + width + "/" + maxSize);
+  if (width > maxSize || height > maxSize) {
+    var ratio = Math.min(maxSize / width, maxSize / height);
+    inImage.setWidth(width * ratio);
+    inImage.setHeight(height * ratio);
+  }
+  inImage.setPosition(column,row);
+  */
+}
+function handleImageFigma(nodeId,idx){
+  iurl =  getFigmaImage(nodeId);
+  if(iurl == "" || iurl == null){ return ;}
+  setImageToCell(iurl,idx);
+}
+
+function buttonAction(){
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  getSetting();
+  if(accessToken == ""|| figmaFileKey == "")return
+
+  // call api 
+
+  const imageUrl = `https://api.figma.com/v1/files/${figmaFileKey}`;
+  const options = {
+    headers: {
+      'X-Figma-Token': accessToken
+    }
+  };
+  let data="";
+  try{
+  const imageResponse = UrlFetchApp.fetch(imageUrl, options);
+  //const imageBlob = imageResponse.getBlob().setName(`${nodeId}.jpg`);
+  data = JSON.parse(imageResponse.getContentText());
+
+  // console.log("data ksjfksldj:",data.document.children[0].children)
+  const dataResponse = data.document.children[0].children
+
+  const nodeIds = []
+  for(let i = 0; i<dataResponse.length;i++){
+    nodeIds.push(dataResponse[i].id) 
+  }
+  console.log("nodeId:",nodeIds)
+  
+  for(let i = 0; i<nodeIds.length;i++){
+    handleImageFigma(nodeIds[i],i)
+  }
+  }
+  catch(e){
+    console.log({e})
+    return e +"/"+ imageUrl
+  }
+
+
+}
+
+
+function apikeyset(){
+//I want to set APIKey(accessToken) and figmaFileKey in the dialog.
+//Once set, I want to use it the next time I open it.
+//(Allow re-setting by overwriting)
+}
+
+// ログ確認のためのテスト
+function test(){
+  buttonAction();
+}
+
+// メニューバーへの追加
+function onOpen() {
+  var ui = SpreadsheetApp.getUi()
+  
+  //メニュー名を決定
+  var menu = ui.createMenu("figmaData");
+  
+  //メニューに実行ボタン名と関数を割り当て
+  // menu.addItem("API Key Setting","buttonAction");
+  menu.addItem("右隣に画像をセット","buttonAction");
+  
+  
+  //スプレッドシートに反映
+  menu.addToUi();
+}

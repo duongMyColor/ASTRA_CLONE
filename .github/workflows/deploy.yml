@@ -1,0 +1,108 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - develop
+      - staging
+      - stress
+      - qa
+      - main
+    # deploy-cms.ymlとdeploy-api.ymlに分けて、pathsで判定していたが、ブランチ間で同じコミットでデプロイする際ができない。
+    # developにpushしてdeployされた後に、stagingで同一コミットでpushしても、pathsで変更がないと判定されトリガーされない。
+    # deploy.ymlにまとめて、paths指定をしないと、cmsとapiが同時にdeployされるが、単純化するために許容している
+    # paths:
+    #   - 'apps/cms/**'
+    #   - '.github/workflows/deploy-cms.yml'
+    #   - '!**.md'
+  workflow_dispatch:
+
+env:
+  cf_enviroment: ${{ github.ref_name == 'main' && 'production' ||  github.ref_name }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  deploy_cms:
+    runs-on: ubuntu-latest
+    name: Deploy CMS
+    defaults:
+      run:
+        working-directory: apps/cms
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Delete Existing wrangler.toml
+        run: rm -f wrangler.toml
+      - name: Create new wrangler.toml
+        run: |
+          cat << 'EOT' > wrangler.toml
+          name = "da-acsta-cms-${{ env.cf_enviroment }}"
+          compatibility_date = "2024-04-26"
+          compatibility_flags = ["nodejs_compat"]
+          pages_build_output_dir = "./.vercel/output/static"
+
+          [[d1_databases]]
+          binding = "DB"
+          database_name = "da-acsta-db-${{ env.cf_enviroment }}"
+          database_id = "${{ secrets.CLOUDFLARE_DATABASE_ID }}"
+          migrations_dir = "./prisma/migrations"
+
+          [[r2_buckets]]
+          binding = "BUCKET"
+          bucket_name = "da-acsta-bucket-${{ env.cf_enviroment }}"
+          EOT
+
+      - name: Display wrangler.toml content
+        run: cat wrangler.toml
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11
+          cache: 'yarn'
+      - name: Install Yarn
+        run: npm install -g yarn@1.22.21
+      # 必要に応じてcacheを検討する。cacheによる想定外の挙動を防ぐために、ひとまずcacheを使わない方針で進める
+      - run: yarn install
+      - name: Build
+        run: npx @cloudflare/next-on-pages
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .vercel/output/static --project-name=da-acsta-cms-${{ env.cf_enviroment }} --commit-dirty=true
+          packageManager: yarn
+          workingDirectory: 'apps/cms'
+
+  deploy_api:
+    runs-on: ubuntu-latest
+    name: Deploy API
+    defaults:
+      run:
+        working-directory: apps/api
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11
+          cache: 'yarn'
+      - name: Install Yarn
+        run: npm install -g yarn@1.22.21
+      # 必要に応じてcacheを検討する。cacheによる想定外の挙動を防ぐために、ひとまずcacheを使わない方針で進める
+      - run: yarn install
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          environment: ${{ env.cf_enviroment }}
+          packageManager: yarn
+          workingDirectory: 'apps/api'

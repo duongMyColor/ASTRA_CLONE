@@ -1,0 +1,129 @@
+2024-04-23 09:16:25.539+07:00 error: 	500 - 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Can't reach database server at `localhost`:`3306`
+
+Please make sure your database server is running at `localhost`:`3306`. - GET - http://localhost:3000/api/users?{%22sort%22:%22[\%22id\%22,\%22DESC\%22]%22,%22range%22:%22[0,24]%22,%22filter%22:%22{}%22}
+        PrismaClientInitializationError: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Can't reach database server at `localhost`:`3306`
+
+Please make sure your database server is running at `localhost`:`3306`.
+    at _n.handleRequestError (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:7154)
+    at _n.handleAndLogRequestError (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:6188)
+    at _n.request (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:5896)
+    at async l (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:128:10816)
+    at async BaseRepo.getAllWithQueryAndSafety (webpack-internal:///(rsc)/./src/app/api/_repos/base/base.repo.ts:104:25)
+    at async getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_repos/user.repo.ts:31:18)
+    at async UserFactory.getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_services/user.service.ts:20:16)
+    at async UserController.getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_controllers/user.controller.ts:38:27)
+    at async eval (webpack-internal:///(rsc)/./src/app/api/users/route.ts:13:71)
+    at async eval (webpack-internal:///(rsc)/./src/middlewares/errorHandler.ts:14:20)
+    at async D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:63809
+    at async eU.execute (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:53964)
+    at async eU.handle (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:65062)
+    at async doRender (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1334:42)
+    at async cacheEntry.responseCache.get.routeKind (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1556:28)
+    at async DevServer.renderToResponseWithComponentsImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1464:28)
+    at async DevServer.renderPageComponent (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1861:24)
+    at async DevServer.renderToResponseImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1899:32)
+    at async DevServer.pipeImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:912:25)
+    at async NextNodeServer.handleCatchallRenderRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\next-server.js:269:17)
+    at async DevServer.handleRequestImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:808:17)
+    at async D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:136:21)
+    at async handleRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:315:24)
+    at async requestHandlerImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:339:13)
+    at async Server.requestListener (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\start-server.js:140:13)
+         
+2024-04-23 09:17:18.345+07:00 error: 	500 - 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Can't reach database server at `localhost`:`3306`
+
+Please make sure your database server is running at `localhost`:`3306`. - GET - http://localhost:3000/api/users?{%22sort%22:%22[\%22id\%22,\%22DESC\%22]%22,%22range%22:%22[0,24]%22,%22filter%22:%22{}%22}
+        PrismaClientInitializationError: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Can't reach database server at `localhost`:`3306`
+
+Please make sure your database server is running at `localhost`:`3306`.
+    at _n.handleRequestError (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:7154)
+    at _n.handleAndLogRequestError (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:6188)
+    at _n.request (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:5896)
+    at async l (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:128:10816)
+    at async BaseRepo.getAllWithQueryAndSafety (webpack-internal:///(rsc)/./src/app/api/_repos/base/base.repo.ts:104:25)
+    at async getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_repos/user.repo.ts:31:18)
+    at async UserFactory.getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_services/user.service.ts:20:16)
+    at async UserController.getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_controllers/user.controller.ts:38:27)
+    at async eval (webpack-internal:///(rsc)/./src/app/api/users/route.ts:13:71)
+    at async eval (webpack-internal:///(rsc)/./src/middlewares/errorHandler.ts:14:20)
+    at async D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:63809
+    at async eU.execute (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:53964)
+    at async eU.handle (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:65062)
+    at async doRender (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1334:42)
+    at async cacheEntry.responseCache.get.routeKind (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1556:28)
+    at async DevServer.renderToResponseWithComponentsImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1464:28)
+    at async DevServer.renderPageComponent (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1861:24)
+    at async DevServer.renderToResponseImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1899:32)
+    at async DevServer.pipeImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:912:25)
+    at async NextNodeServer.handleCatchallRenderRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\next-server.js:269:17)
+    at async DevServer.handleRequestImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:808:17)
+    at async D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:136:21)
+    at async handleRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:315:24)
+    at async requestHandlerImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:339:13)
+    at async Server.requestListener (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\start-server.js:140:13)
+         
+2024-04-23 09:17:49.985+07:00 error: 	500 - 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Can't reach database server at `localhost`:`3306`
+
+Please make sure your database server is running at `localhost`:`3306`. - GET - http://localhost:3000/api/users?{%22sort%22:%22[\%22id\%22,\%22DESC\%22]%22,%22range%22:%22[0,24]%22,%22filter%22:%22{}%22}
+        PrismaClientInitializationError: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Can't reach database server at `localhost`:`3306`
+
+Please make sure your database server is running at `localhost`:`3306`.
+    at _n.handleRequestError (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:7154)
+    at _n.handleAndLogRequestError (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:6188)
+    at _n.request (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:123:5896)
+    at async l (webpack-internal:///(rsc)/./node_modules/.prisma/client/runtime/library.js:128:10816)
+    at async BaseRepo.getAllWithQueryAndSafety (webpack-internal:///(rsc)/./src/app/api/_repos/base/base.repo.ts:104:25)
+    at async getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_repos/user.repo.ts:31:18)
+    at async UserFactory.getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_services/user.service.ts:20:16)
+    at async UserController.getAllWithQuery (webpack-internal:///(rsc)/./src/app/api/_controllers/user.controller.ts:38:27)
+    at async eval (webpack-internal:///(rsc)/./src/app/api/users/route.ts:13:71)
+    at async eval (webpack-internal:///(rsc)/./src/middlewares/errorHandler.ts:14:20)
+    at async D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:63809
+    at async eU.execute (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:53964)
+    at async eU.handle (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:65062)
+    at async doRender (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1334:42)
+    at async cacheEntry.responseCache.get.routeKind (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1556:28)
+    at async DevServer.renderToResponseWithComponentsImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1464:28)
+    at async DevServer.renderPageComponent (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1861:24)
+    at async DevServer.renderToResponseImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:1899:32)
+    at async DevServer.pipeImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:912:25)
+    at async NextNodeServer.handleCatchallRenderRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\next-server.js:269:17)
+    at async DevServer.handleRequestImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\base-server.js:808:17)
+    at async D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:136:21)
+    at async handleRequest (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:315:24)
+    at async requestHandlerImpl (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\router-server.js:339:13)
+    at async Server.requestListener (D:\Code_Congty\da-acstar-cms\node_modules\next\dist\server\lib\start-server.js:140:13)
+         

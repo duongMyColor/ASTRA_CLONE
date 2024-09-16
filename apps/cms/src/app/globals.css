@@ -1,0 +1,19 @@
+:root {
+  --link-color: #5890ff;
+  --box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.15);
+}
+
+p {
+  margin: 0 !important;
+}
+
+.--large {
+  font-size: 2rem !important;
+  padding: 20px !important;
+  background-color: rgb(5, 164, 169) !important;
+  color: white !important;
+}
+
+.RaRichTextInputToolbar-root.css-gtuezi {
+  justify-content: center;
+}

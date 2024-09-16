@@ -1,0 +1,11 @@
+{
+  "name": "@repo/types",
+  "version": "0.0.0",
+  "private": false,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint"
+  }
+}
